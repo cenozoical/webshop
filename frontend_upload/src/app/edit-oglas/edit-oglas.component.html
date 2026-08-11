@@ -1,0 +1,52 @@
+
+<form  (ngSubmit)="sacuvaj_izmene()" ngNativeValidate>
+    <table>
+     
+   <tr><td>Naziv oglasa:</td> <td><input type="text" [(ngModel)] = "oglas_edit.naziv" name="naziv" required [disabled]="!rezim_izmene"></td></tr>
+   <tr><td>Kratak opis:</td> <td><textarea [(ngModel)] = "oglas_edit.opis" name="opis" required [disabled]="!rezim_izmene"></textarea></td></tr>
+   <tr><td>Datum postavke:</td> <td>{{oglas_edit.datum_string}}</td></tr>
+   <tr><td>Kategorija:</td> <td><select type="number" [(ngModel)] = "this.oglas_edit.kategorija" name="kategorija_select" [disabled]="!rezim_izmene">
+    <ng-container *ngFor = "let instanca of kategorije">
+          
+          
+        <option [value] = "instanca.kategorija">{{instanca.kategorija}}</option>
+     
+     
+     
+     
+     
+    
+     </ng-container>
+</select></td></tr>
+   <tr><td>Cena:</td> <td><input type="number" [(ngModel)] = "oglas_edit.cena" name="cena" required [disabled]="!rezim_izmene"></td></tr>
+   <tr *ngIf="rezim_izmene || ( oglas_edit.nova_cena &&    oglas_edit.nova_cena != 0)"><td>Snizena cena:</td> <td><input type="number" [(ngModel)] = "oglas_edit.nova_cena" name="nova_cena" required [disabled]="!rezim_izmene"> (Ako necete snizenje, upisati 0)</td></tr>
+   <tr *ngIf="rezim_izmene || oglas_edit.nova_cena != 0"><td>Snizeno do:</td> <td><input type="datetime-local" [(ngModel)] = "datum" name="datum" [disabled]="!rezim_izmene"></td></tr>
+
+     </table>
+     <table>
+   
+   <tr *ngIf = "oglas_edit.slike.length < 2 && rezim_izmene">
+       <td>Dodaj sliku u galeriju:</td>
+       <td><input type='file'  [(ngModel)] = "slika_path_2" (change)="registracija_slike($event,1)" name = 'slika' accept=".png,.jpg" ></td></tr>
+   
+   <ng-container *ngFor = "let slika of oglas_edit.slike; let i = index">
+   
+   <tr>
+       <td>
+            <img [src]="slika" class = "slika">  
+       </td>
+       <td *ngIf = "rezim_izmene">
+      <button (click) = "ukloni_sliku(i)" type="button">Ukloni sliku</button>
+       </td>
+   </tr>
+   
+   </ng-container>
+   
+   <tr>
+       <td *ngIf = "rezim_izmene" ><button [disabled]="this.pending">Sacuvaj izmene</button></td>
+       <td><input type="checkbox" [(ngModel)] = 'rezim_izmene' name = 'checkbox' id = "checkbox" (change) = "checkbox_promena()" [disabled]="this.pending"> <label for="checkbox">Rezim_izmene</label></td>
+       <td><button type="button" (click) = "delete_oglas()" [disabled]="this.pending">Izbrisi oglas</button></td>
+       <td><button type="button" (click) = "nazad()">Nazad</button></td>
+       
+
+   </tr>

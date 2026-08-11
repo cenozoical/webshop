@@ -1,0 +1,66 @@
+<table>
+    <tr><td><button (click) = "logout()">Logout</button></td>
+    <td><button (click) = "nazad()">Nazad</button></td>
+    </tr>
+
+ </table>
+
+<form (ngSubmit)="dodaj_oglas()" ngNativeValidate>
+    <table>
+       <tr><td> <h1>Dodaj oglas</h1></td> </tr>
+   <tr><td>Naziv oglasa:</td> <td><input type="text" [(ngModel)] = "oglas.naziv" name="naziv" required></td></tr>
+   <tr><td>Opis:</td> <td><textarea [(ngModel)] = "oglas.opis" name="opis" required class="textarea_0"></textarea></td></tr>
+   <tr><td>Cena:</td> <td><input type="number" [(ngModel)] = "oglas.cena" name="cena" required></td></tr>
+   <tr><td>Snizena cena:</td> <td><input type="number" [(ngModel)] = "oglas.nova_cena" name="nova_cena" > (Ako necete snizenje, upisati 0)</td></tr>
+   <tr><td>Snizeno do:</td> <td><input type="datetime-local" [(ngModel)] = "datum" name="datum" [required] = "oglas.nova_cena != 0 && oglas.nova_cena != null"></td> (ignorisi sate, minute - uvek se vodi kao 23:59:59:999)</tr>
+   <tr><td>Kategorija:</td> <td><select type="number" [(ngModel)] = "oglas.kategorija" name="kategorija_select">
+    <ng-container *ngFor = "let instanca of kategorije">
+          
+          
+        <option [value] = "instanca.kategorija">{{instanca.kategorija}}</option>
+     
+     
+     
+     
+     
+    
+     </ng-container>
+</select></td></tr>
+</table>
+   <!-- <tr>
+       
+       <td>Glavna slika:</td>
+    <td><input type='file'  [(ngModel)] = "slika_path" (change)="registracija_slike($event,0)" name = 'slika_glavna' accept=".png,.jpg" [required] = 'radionica.glavna_slika == null'></td></tr>
+    <tr><td> <img [src]="radionica.glavna_slika">  </td>
+       <td *ngIf = "radionica.glavna_slika != null && radionica.glavna_slika != ''"><button type="button" (click)="ukloni_glavnu()">Ukloni sliku</button></td>
+   </tr> -->
+   <table>
+   <tr *ngIf = "oglas.slike.length < 2">
+       <td>Dodaj sliku:</td>
+       <td><input type='file'  [(ngModel)] = "slika_path_2" (change)="registracija_slike($event,1)" name = 'slika' accept=".png,.jpg" [required] = 'oglas.slike.length == 0'></td></tr>
+   
+   <ng-container *ngFor = "let slika of oglas.slike; let i = index">
+   
+   <tr>
+       <td>
+            <img [src]="slika" class="slike">  
+       </td>
+       <td>
+      <button (click) = "ukloni_sliku(i)" type="button">Ukloni sliku</button>
+       </td>
+   </tr>
+   
+   </ng-container>
+   
+   <tr>
+       <td><button type="submit" [disabled]="this.pending">Postavi oglas</button></td></tr>
+       <tr>
+           <!-- <td>Ucitaj sablon:</td>
+       <td><input type='file'[(ngModel)] = "json_filePath"(change)="ucitaj_sablon($event)" name = 'sablon' accept=".json" ></td> -->
+   </tr>
+   
+   
+   
+   
+   </table>
+   </form>

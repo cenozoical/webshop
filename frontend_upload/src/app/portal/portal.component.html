@@ -1,0 +1,31 @@
+
+
+
+   <h3>Portal </h3>
+
+   <form (ngSubmit) = "login()" ngNativeValidate>
+
+    <table>
+    
+    <tr>
+        <td>Korisnicko ime:</td>
+        <td>
+            <input type="text" [(ngModel)] = "username" name = "username"required> 
+        </td>
+    </tr>
+    <tr>
+        <td>Lozinka:</td>
+        <td>
+            <input type="password" [(ngModel)] = "password" name = "password"required> 
+        </td>
+    </tr>
+    <tr>
+        
+        <td>
+            <button type="submit" [disabled]="this.pending">Log in</button>
+        </td>
+      
+    </tr>
+
+
+

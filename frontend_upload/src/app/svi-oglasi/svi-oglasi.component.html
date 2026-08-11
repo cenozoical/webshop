@@ -1,0 +1,23 @@
+<table>
+<tr><td><button (click) = "nazad()">Nazad </button></td></tr>
+<tr><td><h2>Postavljeni oglasi:</h2></td></tr>
+
+<div class="loader" *ngIf = "this.oglasi.length == 0 && loading" ></div>
+<ng-container *ngFor = "let instanca of oglasi">
+
+<tr>
+    <td>{{instanca.naziv}}</td>
+    <td>{{instanca.datum_string}}</td>
+    <td><button (click) = "pregledaj_oglas(instanca)">Pogledaj oglas</button></td>
+
+
+</tr>
+
+</ng-container>
+<div class = "loader_container_alt" *ngIf="!fully_loaded&&this.oglasi.length != 0">
+    <div class="loader_alt" *ngIf="!loaded" ></div>
+    <button type="button" (click)="load_more()"*ngIf = "loaded">Učitaj još</button>
+</div>
+
+</table>
+

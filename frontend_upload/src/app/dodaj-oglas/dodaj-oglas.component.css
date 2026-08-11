@@ -1,0 +1,9 @@
+.slike{
+    max-width: 30vw;
+    max-height: 40vh;
+}
+.textarea_0{
+    resize: none;
+    width: 20vw;
+    height: 20vh;
+}

@@ -1,0 +1,96 @@
+<table>
+    <tr><td><button (click) = "logout()">Logout</button></td></tr>
+ </table>
+
+ <form (ngSubmit)="dodaj_obavestenje()" ngNativeValidate>
+ <table>
+    <tr><td><h3>Dodaj obaveštenje:</h3></td></tr>
+    <tr><td><textarea name="ta_name_0" [(ngModel)] = "temp_news.text" class = "textarea_0" required></textarea></td> <td><button type="submit" [disabled]="this.pending">Dodaj</button></td></tr>
+ </table>
+</form>
+
+<table *ngIf= "obavestenja.length > 0">
+   <tr>
+       <td>
+       <h3> Vaša obaveštenja: </h3>
+       </td>
+   </tr>
+   <ng-container *ngFor = "let instanca of obavestenja">
+       
+   <tr >
+      <td >{{instanca.datum_string}}</td>
+   <td > <textarea disabled="true" class = "textarea_0" >{{instanca.text}}</textarea></td>
+   
+   
+   
+   <td> <button (click) = "izbrisi_obavestenje(instanca)" [disabled]="this.pending"> Izbriši obaveštenje</button></td>
+   </ng-container>
+   
+   </table>
+
+
+   <form (ngSubmit)="dodaj_kategoriju()" ngNativeValidate>
+   <table >
+      <tr>
+          <td>
+          <h3> Kategorije: </h3>
+          </td>
+      </tr>
+     
+      <tr><td><input name = "nova_kategorija" type="text" [(ngModel)]= "nova_kategorija.kategorija" required></td> <td><button type="submit" [disabled]="this.pending">Dodaj kategoriju</button></td>
+         <td>(Dodajte kategoriju pre nego što postavite oglas)</td>
+      </tr>
+   </table>
+</form>
+<table>
+
+      
+      <tr><td><select multiple="true" name="lista_kategorija" class="show_categories"> 
+         <ng-container *ngFor = "let instanca of kategorije">
+          
+          
+               <option disabled="true">{{instanca.kategorija}}</option>
+            
+            
+            
+            
+            
+           
+            </ng-container>
+
+
+
+
+      </select></td></tr>
+
+     
+</table>    
+<form (ngSubmit)="izbrisi_kategoriju()" ngNativeValidate>
+   <table >
+      <tr>
+          <td>
+          <input type="text" required name="deletion_category" [(ngModel)] = "kategorija_za_brisanje_string">
+          </td>
+          <td><button type="submit" [disabled]="this.pending">Izbrisi kategoriju</button></td>
+      </tr>
+     
+   </table>
+</form>
+
+<table >
+   <tr>
+       <td>
+       <h3> Roba: </h3>
+       </td>
+   </tr>
+
+   <tr>
+      <td><a routerLink="/dodaj_oglas" routerLinkActive="true">Dodaj oglas</a> </td> 
+     
+   </tr>
+   <tr>
+      <td><a routerLink = "/svi_oglasi" routerLinkActive="true">Lista oglasa</a></td>
+   </tr>
+   </table>
+
+   
